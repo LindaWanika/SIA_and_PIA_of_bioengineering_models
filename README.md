@@ -1,0 +1,5 @@
+This repository provides the relevant codes, scripts and data to perform structural identifiability analysis (SIA) and practical identifiability analysis (PIA) for bioengineering models. 
+
+The SIA is performed in MATHEMATICA which requires a license. A trial version of MATHEMATICA can be downloaded from https://www.wolfram.com/mathematica/trial/.  In addition to this the Exact Arithmetic Rank (EAR) tool which is used in MATHEMATICA can be requested from: identifiabilityanalysis@fcc.chalmers.se. Although the Taylor series approach in this repository is performed using MATHEMATICA, a PDF copy is also provided in order to enable users to view the analysis and utilise their preferred symbolic software to perform the Taylor series approach. 
+
+The PIA is performed in MATLAB, using the Data2Dynamics tool: https://github.com/Data2Dynamics/d2d/wiki/Installation. MATLAB also requires a license however, a trial version can be downloaded from https://uk.mathworks.com/campaigns/products/trials.html. 
