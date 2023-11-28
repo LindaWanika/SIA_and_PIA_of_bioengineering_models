@@ -1,0 +1,413 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14082,        405]
+NotebookOptionsPosition[     11904,        367]
+NotebookOutlinePosition[     12301,        383]
+CellTagsIndexPosition[     12258,        380]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SIA using EAR for Model 1", "Title",
+ CellChangeTimes->{{3.910117567337803*^9, 
+  3.9101175747910347`*^9}},ExpressionUUID->"ae004821-d7a4-4614-8983-\
+02fae4a5b67e"],
+
+Cell["\<\
+Grey box depicts MATHEMATICA code. 
+The \[OpenCurlyDoubleQuote]Needs[IdentifiabilityAnalysis`]\
+\[CloseCurlyDoubleQuote] is calling the EAR package 
+deq:  defining the system of ODEs
+ModelStates:  name of the states
+ic:  the initital conditions 
+ModelParameters: parameters of the model known and unknown
+observationVector: observed states and any known parameters
+iad: performs the identifiability analysis \
+\>", "Text",
+ CellChangeTimes->{{3.910117585671216*^9, 3.9101176279581614`*^9}, {
+  3.910117669974264*^9, 
+  3.910117847658119*^9}},ExpressionUUID->"d12a0bd0-b3ac-41ac-abda-\
+a72920cbe820"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<IdentifiabilityAnalysis`\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deq", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"mRNA", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["k", "1"]}], "-", 
+       RowBox[{
+        SubscriptBox["k", "2"], "*", 
+        RowBox[{"mRNA", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Protein", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["k", "3"], "*", 
+        RowBox[{"mRNA", "[", "t", "]"}]}], "-", 
+       RowBox[{
+        SubscriptBox["k", "4"], "*", 
+        RowBox[{"Protein", "[", "t", "]"}]}]}]}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelStates", "=", 
+   RowBox[{"{", 
+    RowBox[{"mRNA", ",", "Protein"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ic", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"mRNA", "[", "0", "]"}], "\[Equal]", "2.5"}], ",", 
+     RowBox[{
+      RowBox[{"Protein", "[", "0", "]"}], "\[Equal]", "6.5"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelParameters", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["k", "1"], ",", 
+     SubscriptBox["k", "2"], ",", 
+     SubscriptBox["k", "3"], ",", 
+     SubscriptBox["k", "4"]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"observationVector", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"mRNA", "[", "t", "]"}], ",", 
+     RowBox[{"Protein", "[", "t", "]"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"iad", "=", 
+  RowBox[{"IdentifiabilityAnalysis", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"deq", ",", "ic"}], "}"}], ",", "observationVector"}], "}"}], 
+    ",", "modelStates", ",", "modelParameters", ",", "t"}], "]"}]}]}], "Code",\
+
+ CellChangeTimes->{
+  3.910117881800517*^9},ExpressionUUID->"c62d0c4a-9014-4a03-a2a6-\
+abb265d21835"],
+
+Cell[BoxData[
+ RowBox[{"\"\<IdentifiabilityAnalysisData[True, <>]\>\"", 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.9101179092685537`*^9, 3.91011790926904*^9}, 
+   3.910118098739788*^9},ExpressionUUID->"3f9aef9b-2c74-4321-bf51-\
+6a9811eddfd3"],
+
+Cell["The model is therefore structurally identifiable.", "Text",
+ CellChangeTimes->{{3.91011810790626*^9, 
+  3.9101181220176897`*^9}},ExpressionUUID->"e5282772-a9e4-44ea-a76c-\
+fee50ee80bc3"],
+
+Cell[CellGroupData[{
+
+Cell["SIA using EAR for Model 1 when only mRNA is observed", "Subtitle",
+ CellChangeTimes->{{3.910117953911029*^9, 
+  3.910117966214509*^9}},ExpressionUUID->"d16e3205-a97c-4645-858a-\
+916bf592a3f3"],
+
+Cell["\<\
+In order to understand how to utilise the tool in the event of an \
+unidentifiable model, the EAR analysis for Model 1 when only mRNA is observed \
+is presented below:\
+\>", "Text",
+ CellChangeTimes->{{3.910117985925782*^9, 
+  3.910118035708268*^9}},ExpressionUUID->"70880111-61cb-448a-b531-\
+cccac1f9c819"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<IdentifiabilityAnalysis`\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deq", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"mRNA", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["k", "1"]}], "-", 
+       RowBox[{
+        SubscriptBox["k", "2"], "*", 
+        RowBox[{"mRNA", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Protein", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["k", "3"], "*", 
+        RowBox[{"mRNA", "[", "t", "]"}]}], "-", 
+       RowBox[{
+        SubscriptBox["k", "4"], "*", 
+        RowBox[{"Protein", "[", "t", "]"}]}]}]}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelStates", "=", 
+   RowBox[{"{", 
+    RowBox[{"mRNA", ",", "Protein"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ic", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"mRNA", "[", "0", "]"}], "\[Equal]", "2.5"}], ",", 
+     RowBox[{
+      RowBox[{"Protein", "[", "0", "]"}], "\[Equal]", "6.5"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelParameters", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["k", "1"], ",", 
+     SubscriptBox["k", "2"], ",", 
+     SubscriptBox["k", "3"], ",", 
+     SubscriptBox["k", "4"]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"observationVector", "=", 
+   RowBox[{"{", 
+    RowBox[{"mRNA", "[", "t", "]"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"iad", "=", 
+  RowBox[{"IdentifiabilityAnalysis", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"deq", ",", "ic"}], "}"}], ",", "observationVector"}], "}"}], 
+    ",", "modelStates", ",", "modelParameters", ",", "t"}], "]"}]}]}], "Code",
+ CellChangeTimes->{
+  3.91011807148064*^9},ExpressionUUID->"0bd479cb-4a43-4c80-b9b2-46bd5188845d"],
+
+Cell[BoxData["\"\<IdentifiabilityAnalysisData[False, <>]\>\""], "Input",
+ CellChangeTimes->{{3.910118090270783*^9, 
+  3.910118095138777*^9}},ExpressionUUID->"cd49ddab-b111-4312-b356-\
+b4fa91f5289c"],
+
+Cell["\<\
+The model is structurally unidentifiable. The following commands can provide \
+more insights on how to make the model structurally identifiable. \
+\>", "Text",
+ CellChangeTimes->{{3.910118135993266*^9, 
+  3.910118170042851*^9}},ExpressionUUID->"c3c247c8-7849-4254-b738-\
+9ff357c088fc"],
+
+Cell[BoxData[
+ RowBox[{"iad", "[", "\"\<NonIdentifiableParameters\>\"", "]"}]], "Code",
+ CellChangeTimes->{
+  3.91011825812479*^9},ExpressionUUID->"2e83df38-a138-4b18-8ed4-b832263415ad"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["k", "3"], ",", 
+   SubscriptBox["k", "4"]}], "}"}]], "Input",
+ CellChangeTimes->{{3.910118282579319*^9, 
+  3.9101182825797863`*^9}},ExpressionUUID->"570a22be-d2e1-4ad7-a186-\
+d6409fe37ab8"],
+
+Cell[BoxData[
+ RowBox[{"iad", "[", "\"\<DegreesOfFreedom\>\"", "]"}]], "Code",
+ CellChangeTimes->{
+  3.910118299603189*^9},ExpressionUUID->"1e6ada7b-1c63-4bcd-bc0c-\
+be3207c40dd3"],
+
+Cell[BoxData["2"], "Input",
+ CellChangeTimes->{{3.91011831021419*^9, 
+  3.910118310214533*^9}},ExpressionUUID->"e33ca600-3f07-4752-b80b-\
+a03182058936"],
+
+Cell[TextData[{
+ "The first command identifies the unidentifiable parameters of the model and \
+the degrees of freedom argument identifies how many of the unidentifiable \
+parameters need to be known/measured in order for the model to be \
+structurally identifiable. In this example both ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["k", "3"], " ", "and", " ", 
+    SubscriptBox["k", "4"], " "}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e1f4215b-0a74-410b-863b-80ec112b3322"],
+ "need to be known in order for the model to be structurally identifiable."
+}], "Text",
+ CellChangeTimes->{{3.9101183313655767`*^9, 
+  3.91011844945024*^9}},ExpressionUUID->"8bbc720c-d884-4d2f-9e01-\
+c7d4e4934b8b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "SIA using EAR for Model 1 when only mRNA is observed but ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "3"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "7543ee6c-f4bc-44de-b194-91dd8a96616b"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "bbd1a2dd-6a25-4c13-8af8-f3063d1bc704"],
+ " are assumed to be known"
+}], "Subtitle",
+ CellChangeTimes->{{3.910118458545094*^9, 
+  3.910118488032261*^9}},ExpressionUUID->"3d966b36-ab12-4aaa-9b6f-\
+3f451be9aa9b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<IdentifiabilityAnalysis`\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deq", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"mRNA", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["k", "1"]}], "-", 
+       RowBox[{
+        SubscriptBox["k", "2"], "*", 
+        RowBox[{"mRNA", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Protein", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["k", "3"], "*", 
+        RowBox[{"mRNA", "[", "t", "]"}]}], "-", 
+       RowBox[{
+        SubscriptBox["k", "4"], "*", 
+        RowBox[{"Protein", "[", "t", "]"}]}]}]}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelStates", "=", 
+   RowBox[{"{", 
+    RowBox[{"mRNA", ",", "Protein"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ic", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"mRNA", "[", "0", "]"}], "\[Equal]", "2.5"}], ",", 
+     RowBox[{
+      RowBox[{"Protein", "[", "0", "]"}], "\[Equal]", "6.5"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelParameters", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["k", "1"], ",", 
+     SubscriptBox["k", "2"], ",", 
+     SubscriptBox["k", "3"], ",", 
+     SubscriptBox["k", "4"]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"observationVector", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"mRNA", "[", "t", "]"}], ",", 
+     SubscriptBox["k", "3"], ",", 
+     SubscriptBox["k", "4"]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"iad", "=", 
+  RowBox[{"IdentifiabilityAnalysis", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"deq", ",", "ic"}], "}"}], ",", "observationVector"}], "}"}], 
+    ",", "modelStates", ",", "modelParameters", ",", "t"}], "]"}]}]}], "Code",\
+
+ CellChangeTimes->{
+  3.910118521461608*^9},ExpressionUUID->"965bd13f-3424-4ae0-b0c4-\
+349e637e5871"],
+
+Cell[BoxData[
+ RowBox[{"\"\<IdentifiabilityAnalysisData[True, <>]\>\"", 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.910118537874398*^9, 
+  3.910118537874959*^9}},ExpressionUUID->"0f5f812b-dd87-414a-b933-\
+63c775627e8c"],
+
+Cell["\<\
+This version of Model 1 is now also structurally identifiable \
+\>", "Text",
+ CellChangeTimes->{{3.910118548662479*^9, 
+  3.910118560677861*^9}},ExpressionUUID->"0d1b7692-9762-4065-b3f7-\
+94390d18c1a3"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{236, Automatic}, {Automatic, 50}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6487f3a7-006b-4b2b-a9d8-94c9824e2a8e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 170, 3, 98, "Title",ExpressionUUID->"ae004821-d7a4-4614-8983-02fae4a5b67e"],
+Cell[753, 27, 609, 14, 196, "Text",ExpressionUUID->"d12a0bd0-b3ac-41ac-abda-a72920cbe820"],
+Cell[1365, 43, 2156, 67, 243, "Code",ExpressionUUID->"c62d0c4a-9014-4a03-a2a6-abb265d21835"],
+Cell[3524, 112, 259, 5, 52, InheritFromParent,ExpressionUUID->"3f9aef9b-2c74-4321-bf51-6a9811eddfd3"],
+Cell[3786, 119, 192, 3, 35, "Text",ExpressionUUID->"e5282772-a9e4-44ea-a76c-fee50ee80bc3"],
+Cell[CellGroupData[{
+Cell[4003, 126, 198, 3, 53, "Subtitle",ExpressionUUID->"d16e3205-a97c-4645-858a-916bf592a3f3"],
+Cell[4204, 131, 317, 7, 35, "Text",ExpressionUUID->"70880111-61cb-448a-b531-cccac1f9c819"],
+Cell[4524, 140, 2085, 62, 243, "Code",ExpressionUUID->"0bd479cb-4a43-4c80-b9b2-46bd5188845d"],
+Cell[6612, 204, 198, 3, 30, InheritFromParent,ExpressionUUID->"cd49ddab-b111-4312-b356-b4fa91f5289c"],
+Cell[6813, 209, 295, 6, 35, "Text",ExpressionUUID->"c3c247c8-7849-4254-b738-9ff357c088fc"],
+Cell[7111, 217, 186, 3, 52, "Code",ExpressionUUID->"2e83df38-a138-4b18-8ed4-b832263415ad"],
+Cell[7300, 222, 246, 7, 30, InheritFromParent,ExpressionUUID->"570a22be-d2e1-4ad7-a186-d6409fe37ab8"],
+Cell[7549, 231, 180, 4, 52, "Code",ExpressionUUID->"1e6ada7b-1c63-4bcd-bc0c-be3207c40dd3"],
+Cell[7732, 237, 152, 3, 30, InheritFromParent,ExpressionUUID->"e33ca600-3f07-4752-b80b-a03182058936"],
+Cell[7887, 242, 735, 16, 127, "Text",ExpressionUUID->"8bbc720c-d884-4d2f-9e01-c7d4e4934b8b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8659, 263, 585, 17, 85, "Subtitle",ExpressionUUID->"3d966b36-ab12-4aaa-9b6f-3f451be9aa9b"],
+Cell[9247, 282, 2176, 67, 243, "Code",ExpressionUUID->"965bd13f-3424-4ae0-b0c4-349e637e5871"],
+Cell[11426, 351, 235, 5, 52, InheritFromParent,ExpressionUUID->"0f5f812b-dd87-414a-b933-63c775627e8c"],
+Cell[11664, 358, 212, 5, 35, "Text",ExpressionUUID->"0d1b7692-9762-4065-b3f7-94390d18c1a3"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

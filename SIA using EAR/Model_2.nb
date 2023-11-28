@@ -1,0 +1,185 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5641,        175]
+NotebookOptionsPosition[      4938,        154]
+NotebookOutlinePosition[      5335,        170]
+CellTagsIndexPosition[      5292,        167]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SIA using EAR for Model 2", "Title",
+ CellChangeTimes->{{3.9101186605485783`*^9, 
+  3.9101186621441727`*^9}},ExpressionUUID->"c74b24f6-c565-4cda-93da-\
+bd918f65a6fa"],
+
+Cell["\<\
+Grey box depicts MATHEMATICA code. 
+The \[OpenCurlyDoubleQuote]Needs[IdentifiabilityAnalysis`]\
+\[CloseCurlyDoubleQuote] is calling the EAR package 
+deq:  defining the system of ODEs
+ModelStates:  name of the states
+ic:  the initital conditions 
+ModelParameters: parameters of the model known and unknown
+observationVector: observed states and any known parameters
+iad: performs the identifiability analysis \
+\>", "Text",
+ CellChangeTimes->{
+  3.91011867538797*^9},ExpressionUUID->"906b35dc-a668-4ee0-9f3b-8c3fa9facb6f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<IdentifiabilityAnalysis`\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deq", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Glucose", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{
+        SubscriptBox["D", "r"], "*", 
+        RowBox[{"(", 
+         RowBox[{"GF", "-", 
+          RowBox[{"Glucose", "[", "t", "]"}]}], ")"}]}], "-", 
+       RowBox[{
+        SubscriptBox["r", "glu"], "*", 
+        RowBox[{"X", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Lactate", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", 
+         SubscriptBox["D", "r"]}], "*", 
+        RowBox[{"Lactate", "[", "t", "]"}]}], "+", 
+       RowBox[{
+        SubscriptBox["r", "lac"], "*", 
+        RowBox[{"X", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"X", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           SubscriptBox["\[Mu]", "max"], "*", 
+           FractionBox[
+            RowBox[{"Glucose", "[", "t", "]"}], 
+            RowBox[{
+             SubscriptBox["km", "glu"], "+", 
+             RowBox[{"Glucose", "[", "t", "]"}]}]], "*", 
+           FractionBox[
+            SubscriptBox["ki", "lac"], 
+            RowBox[{
+             SubscriptBox["ki", "lac"], "+", 
+             SuperscriptBox[
+              RowBox[{"(", 
+               RowBox[{"Lactate", "[", "t", "]"}], ")"}], "2"]}]]}], ")"}], 
+         "-", 
+         SubscriptBox["D", "r"]}], ")"}], "*", 
+       RowBox[{"X", "[", "t", "]"}]}]}]}], "\[IndentingNewLine]", "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelStates", "=", 
+   RowBox[{"{", 
+    RowBox[{"Glucose", ",", "Lactate", ",", "X"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ic", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Glucose", "[", "0", "]"}], "\[Equal]", "1.01"}], ",", 
+     RowBox[{
+      RowBox[{"Lactate", "[", "0", "]"}], "\[Equal]", "3.98"}], ",", 
+     RowBox[{
+      RowBox[{"X", "[", "0", "]"}], "\[Equal]", "0.46"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelParameters", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["D", "r"], ",", "GF", ",", 
+     SubscriptBox["r", "glu"], ",", 
+     SubscriptBox["r", "lac"], ",", 
+     SubscriptBox["\[Mu]", "max"], ",", 
+     SubscriptBox["km", "glu"], ",", 
+     SubscriptBox["ki", "lac"]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"observationVector", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Glucose", "[", "t", "]"}], ",", 
+     RowBox[{"Lactate", "[", "t", "]"}], ",", 
+     RowBox[{"X", "[", "t", "]"}], ",", 
+     SubscriptBox["D", "r"], ",", "GF"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"iad", "=", 
+  RowBox[{"IdentifiabilityAnalysis", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"deq", ",", "ic"}], "}"}], ",", "observationVector"}], "}"}], 
+    ",", "modelStates", ",", "modelParameters", ",", "t"}], "]"}]}]}], "Code",\
+
+ CellChangeTimes->{
+  3.910119091309457*^9},ExpressionUUID->"5fa43dd2-e05b-4103-bafe-\
+f8d296af5e48"],
+
+Cell[BoxData["\"\<IdentifiabilityAnalysisData[True, <>]\>\""], "Input",
+ CellChangeTimes->{{3.9101191105546913`*^9, 
+  3.910119110555214*^9}},ExpressionUUID->"76b49cd0-e4c7-49fd-90ce-\
+2007e3c1fe04"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{236, Automatic}, {Automatic, 27}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"59f6eb57-7326-445d-9a0c-6798a9ae9472"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 172, 3, 98, "Title",ExpressionUUID->"c74b24f6-c565-4cda-93da-bd918f65a6fa"],
+Cell[755, 27, 531, 12, 196, "Text",ExpressionUUID->"906b35dc-a668-4ee0-9f3b-8c3fa9facb6f"],
+Cell[CellGroupData[{
+Cell[1311, 43, 3397, 102, 304, "Code",ExpressionUUID->"5fa43dd2-e05b-4103-bafe-f8d296af5e48"],
+Cell[4711, 147, 199, 3, 30, InheritFromParent,ExpressionUUID->"76b49cd0-e4c7-49fd-90ce-2007e3c1fe04"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

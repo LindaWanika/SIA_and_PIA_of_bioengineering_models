@@ -1,0 +1,222 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6841,        212]
+NotebookOptionsPosition[      6139,        191]
+NotebookOutlinePosition[      6535,        207]
+CellTagsIndexPosition[      6492,        204]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SIA using EAR for Model 3", "Title",
+ CellChangeTimes->{{3.910119153936833*^9, 
+  3.910119155652605*^9}},ExpressionUUID->"e5370a59-9bf5-4fb0-ae6a-\
+df2280acea5f"],
+
+Cell[TextData[{
+ "Grey box depicts MATHEMATICA code. \nThe \
+\[OpenCurlyDoubleQuote]Needs[IdentifiabilityAnalysis`]\[CloseCurlyDoubleQuote]\
+ is calling the EAR package \ndeq:  defining the system of ODEs\nModelStates: \
+ name of the states\nic:  the initital conditions \nModelParameters: \
+parameters of the model known and unknown\nobservationVector: observed states \
+and any known parameters\niad: performs the identifiability analysis.\n\n\
+Model 3 has to be simplified in order to utilise the EAR tool.\n\nOriginal \
+ODE:\n\n",
+ Cell[BoxData[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"X", "'"}], "[", "t", "]"}], ":=", 
+   FractionBox[
+    RowBox[{
+     SubscriptBox["r", "g"], "*", 
+     RowBox[{"X", "[", "t", "]"}]}], 
+    RowBox[{"(", 
+     RowBox[{"1", "+", 
+      RowBox[{"Exp", "[", 
+       RowBox[{"a", "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Inhib", "[", "t", "]"}], "-", "b"}], ")"}]}], "]"}]}], 
+     ")"}]]}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Inhib", "'"}], "[", "t", "]"}], ":=", 
+   RowBox[{
+    FractionBox[
+     RowBox[{
+      SubscriptBox["r", "g"], "*", 
+      RowBox[{"X", "[", "t", "]"}]}], 
+     RowBox[{"(", 
+      RowBox[{"1", "+", 
+       RowBox[{"Exp", "[", 
+        RowBox[{"a", "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Inhib", "[", "t", "]"}], "-", "b"}], ")"}]}], "]"}]}], 
+      ")"}]], "-", 
+    RowBox[{
+     SubscriptBox["r", "d"], "*", 
+     RowBox[{"Inhib", "[", "t", "]"}]}]}]}]}],
+  CellChangeTimes->{{3.910110522469043*^9, 3.910110644171207*^9}, {
+   3.910110683704733*^9, 3.910110701836528*^9}, {3.91011151339077*^9, 
+   3.910111521467801*^9}},ExpressionUUID->
+  "181434d2-8656-4448-83c4-fcb0d2d69453"],
+ "\n\nInhib was used instead of I, as \[OpenCurlyDoubleQuote]I\
+\[CloseCurlyDoubleQuote] denotes imaginary in MATHEMATICA"
+}], "Text",
+ CellChangeTimes->{
+  3.91011917161607*^9, {3.910119209469307*^9, 3.91011923518751*^9}, {
+   3.910119273066841*^9, 
+   3.9101192956553593`*^9}},ExpressionUUID->"7f2a5256-31bf-495a-9b6f-\
+1e4a317e066f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<IdentifiabilityAnalysis`\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"deq", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"X", "'"}], "[", "t", "]"}], "\[Equal]", 
+      FractionBox[
+       RowBox[{
+        SubscriptBox["r", "g"], "*", 
+        RowBox[{"X", "[", "t", "]"}]}], 
+       RowBox[{"(", 
+        RowBox[{"1", "+", 
+         RowBox[{
+          SubscriptBox["r", "ab"], "*", 
+          RowBox[{"Ia", "[", "t", "]"}]}]}], ")"}]]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Inhib", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       FractionBox[
+        RowBox[{
+         SubscriptBox["r", "g"], "*", 
+         RowBox[{"X", "[", "t", "]"}]}], 
+        RowBox[{"(", 
+         RowBox[{"1", "+", 
+          RowBox[{
+           SubscriptBox["r", "ab"], "*", 
+           RowBox[{"Ia", "[", "t", "]"}]}]}], ")"}]], "-", 
+       RowBox[{
+        SubscriptBox["r", "d"], "*", 
+        RowBox[{"Inhib", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Ia", "'"}], "[", "t", "]"}], "\[Equal]", 
+      RowBox[{
+       RowBox[{"Ia", "[", "t", "]"}], "*", "a", "*", 
+       RowBox[{"(", 
+        RowBox[{
+         FractionBox[
+          RowBox[{
+           SubscriptBox["r", "g"], "*", 
+           RowBox[{"X", "[", "t", "]"}]}], 
+          RowBox[{"(", 
+           RowBox[{"1", "+", 
+            RowBox[{
+             SubscriptBox["r", "ab"], "*", 
+             RowBox[{"Ia", "[", "t", "]"}]}]}], ")"}]], "-", 
+         RowBox[{
+          SubscriptBox["r", "d"], "*", 
+          RowBox[{"Inhib", "[", "t", "]"}]}]}], ")"}]}]}]}], 
+    "\[IndentingNewLine]", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelStates", "=", 
+   RowBox[{"{", 
+    RowBox[{"X", ",", "Inhib", ",", "Ia"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ic", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"X", "[", "0", "]"}], "\[Equal]", "4.45"}], ",", 
+     RowBox[{
+      RowBox[{"Inhib", "[", "0", "]"}], "\[Equal]", "0"}], ",", 
+     RowBox[{
+      RowBox[{"Ia", "[", "0", "]"}], "\[Equal]", "1"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"modelParameters", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["r", "g"], ",", 
+     SubscriptBox["r", "ab"], ",", 
+     SubscriptBox["r", "d"], ",", "a"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"observationVector", "=", 
+   RowBox[{"{", 
+    RowBox[{"X", "[", "t", "]"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"iad", "=", 
+  RowBox[{"IdentifiabilityAnalysis", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"deq", ",", "ic"}], "}"}], ",", "observationVector"}], "}"}], 
+    ",", "modelStates", ",", "modelParameters", ",", "t"}], "]"}]}]}], "Code",\
+
+ CellChangeTimes->{
+  3.910119553655157*^9},ExpressionUUID->"30aca3ea-f2bd-441b-a1cf-\
+7e1f57d82a49"],
+
+Cell[BoxData["\"\<IdentifiabilityAnalysisData[True, <>]\>\""], "Input",
+ CellChangeTimes->{{3.910119574482881*^9, 
+  3.910119574483399*^9}},ExpressionUUID->"4706a807-4ec1-49b6-b0cb-\
+7ec836fa2925"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{28, Automatic}, {36, Automatic}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"c06d3e46-328f-4175-9f54-c301c4ca534f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 168, 3, 98, "Title",ExpressionUUID->"e5370a59-9bf5-4fb0-ae6a-df2280acea5f"],
+Cell[751, 27, 2059, 55, 422, "Text",ExpressionUUID->"7f2a5256-31bf-495a-9b6f-1e4a317e066f"],
+Cell[CellGroupData[{
+Cell[2835, 86, 3076, 96, 341, "Code",ExpressionUUID->"30aca3ea-f2bd-441b-a1cf-7e1f57d82a49"],
+Cell[5914, 184, 197, 3, 30, InheritFromParent,ExpressionUUID->"4706a807-4ec1-49b6-b0cb-7ec836fa2925"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
