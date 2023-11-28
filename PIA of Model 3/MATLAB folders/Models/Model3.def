@@ -1,0 +1,31 @@
+%Similar to the PIA of model 2, the parameters in the model are described as k1 to k4. Also the original ODE for model 3 
+%Parameter name in model script	Original parameter name 
+%K1	r_g 
+%K2	a 
+%K3	b 
+%K4	r_d 
+
+
+DESCRIPTION
+ 
+"Version model 3: A model for erythrocyte growth"
+
+PREDICTOR
+T T "hour" "time" 0 36
+COMPARTMENTS
+ 
+STATES
+Cells C "mmol/l" "conc." 
+I C "mmol/l" "conc."
+
+INPUTS
+ 
+ODES
+"(k1*Cells)/(1 + exp(k2*(Inhibitory-k3)))"
+"((k1*Cells)/(1 + exp(k2*(Inhibitory-k3))))-k4*Inhibitory"
+ 
+DERIVED
+ 
+CONDITIONS
+init_Cells "4.45"
+init_Inhibitory "0"
