@@ -1,1 +1,1 @@
-
+PIA was only performed on Model 2 and Model 3 as Model 1 does not have any experimental data. Data was extracted using Webplotdigitizer: https://automeris.io/WebPlotDigitizer/index.html. Both Model 2 and Model 3 contain the necessary folders and files that can be imported into MATLAB (once the Data2Dynamics tool has been successfully installed) to perform the PIA. 
