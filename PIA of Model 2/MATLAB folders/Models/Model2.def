@@ -1,0 +1,34 @@
+DESCRIPTION
+ 
+"Version model 2: A bioreactor model"
+
+%In order to avoid complications with parameter names, the parameters are described as k1 to k6. Moreover Glu, Lac and Cells are used to denote the states Glucose, Lactate and X respectively
+%Parameter name in model script	Original parameter name 
+%k1	r_glu 
+%k2	r_lac 
+%k3	?_max 
+%k4	?km?_glu 
+%k5 	?ki?_lac 
+
+
+PREDICTOR
+T T "hour" "time" 0 250 %The units are irrelevant to the calculations, 250 is simply the last observation time rounded up.
+COMPARTMENTS
+ 
+STATES
+Glu C "mmol/l" "conc." %Unit type concentration, similar to previous points this is irrelevant to the calculations but necessary for the script
+Lac C "mmol/l" "conc."
+Cells C "mmol/l" "conc."
+ 
+INPUTS
+ 
+ODES
+"0.017*(0.131 - glu) ? k1*Cells"
+" -0.017*Lac + k2*Cells"
+"((k3*Glu/(k4 + Glu)*k5/(k5 + (Lac)^2)) ? 0.017)*Cells"
+DERIVED
+ 
+CONDITIONS
+init_Glu "1.01"
+init_Lac "3.98"
+init_Cells "0.46" %The initial conditions of each of the states Note that these are indeed different from the initial conditions used in the structural identifiability analysis. However this was used in order to fit to the data
