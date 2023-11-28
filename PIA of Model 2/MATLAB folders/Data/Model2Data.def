@@ -1,0 +1,20 @@
+DESCRIPTION
+"Data Version model 2: A bioreactor model"
+ 
+PREDICTOR
+t               T   "min"         time  0   250
+ 
+INPUTS
+ 
+OBSERVABLES %Observed states, the names on the left refer to how these states are named in the associated data file, whereas the names on the right refer to the names in the associated model file
+Glucose     C  "mmol/l"    conc. 0   0   "Glu"
+Lactate      C  "mmol/l"    conc. 0   0   "Lac"
+X    C  "mmol/l"    conc. 0   0   "Cells" %The two ?0? arguments refer to the fact that the values do not need to be rescaled to one and that the values do not need to be compared on a log-10 scale
+ 
+        
+ERRORS  
+Glucose "ERROR_abs" 
+Lactate "ERROR_abs1"
+X "ERROR_abs2" %Refers to absolute error between prediction and data, while here each observed state has a different error model, all of them can have the same error model as well 
+
+%The data file should have the same file name as the data script that was just created. 
