@@ -1,0 +1,17 @@
+DESCRIPTION
+"Data Version model 3: A cell processes model "
+ 
+PREDICTOR
+t               T   "min"         time  0   36
+ 
+INPUTS
+ 
+OBSERVABLES
+X     C  "mmol/l"    conc. 0   0   "Cells"
+
+ERRORS  
+X "ERROR_abs" 
+
+        
+CONDITIONS
+
