@@ -1,0 +1,259 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8249,        251]
+NotebookOptionsPosition[      7143,        224]
+NotebookOutlinePosition[      7540,        240]
+CellTagsIndexPosition[      7497,        237]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SIA for Model 1 using the Taylor series approach", "Title",
+ CellChangeTimes->{{3.910120226386848*^9, 
+  3.9101202446260233`*^9}},ExpressionUUID->"d57d4984-8730-477a-909f-\
+2f963d2f28df"],
+
+Cell["ODE system", "Subtitle",
+ CellChangeTimes->{{3.910120302416375*^9, 
+  3.910120305600333*^9}},ExpressionUUID->"004e17c0-b0f0-49c2-be12-\
+0887d94e3eb1"],
+
+Cell[TextData[{
+ Cell[BoxData[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"mRNA", "'"}], "[", "t", "]"}], "\[Equal]", 
+   RowBox[{
+    RowBox[{"-", 
+     SubscriptBox["k", "1"]}], "-", 
+    RowBox[{
+     SubscriptBox["k", "2"], "*", 
+     RowBox[{"mRNA", "[", "t", "]"}]}]}]}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Protein", "'"}], "[", "t", "]"}], "\[Equal]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["k", "3"], "*", 
+     RowBox[{"mRNA", "[", "t", "]"}]}], "-", 
+    RowBox[{
+     SubscriptBox["k", "4"], "*", 
+     RowBox[{"Protein", "[", "t", "]"}]}]}]}]}],
+  CellChangeTimes->{3.910117881800517*^9},ExpressionUUID->
+  "8c12c3c4-9ee0-4605-bf2b-af423068e6d2"],
+ "\nInitial conditions: mRNA[0]\[Equal]2.5,Protein[0]\[Equal]6.5\nBoth states \
+are observed and all parameters are assumed to be unknown"
+}], "Text",
+ CellChangeTimes->{{3.910120364060499*^9, 3.910120415698275*^9}, {
+  3.910121379717948*^9, 
+  3.910121379718039*^9}},ExpressionUUID->"a2279607-42ac-4101-b21b-\
+b6ad1a7408e2"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+First two derivatives for each state for when t = 0\
+\>", "Subtitle",
+ CellChangeTimes->{{3.910120429617936*^9, 3.910120500940257*^9}, {
+  3.910121198004188*^9, 
+  3.910121221088766*^9}},ExpressionUUID->"783ca2e0-4a07-4356-82d1-\
+9ff72bc1dd33"],
+
+Cell[TextData[{
+ "mRNA\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"-", 
+    SubscriptBox["k", "1"]}], "-", 
+   RowBox[{"2.5`", " ", 
+    SubscriptBox["k", "2"]}]}]],
+  CellChangeTimes->{3.910120670310795*^9},ExpressionUUID->
+  "e919be5f-b633-4669-a64e-407fa547b381"],
+ "\nmRNA\[CloseCurlyQuote]\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"-", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["k", "1"]}], "-", 
+      RowBox[{"2.5`", " ", 
+       SubscriptBox["k", "2"]}]}], ")"}]}], " ", 
+   SubscriptBox["k", "2"]}]],
+  CellChangeTimes->{3.910120670313027*^9},ExpressionUUID->
+  "445ac47d-7c80-4fc9-a67a-634c1bc0be91"],
+ "\nProtein\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"2.5`", " ", 
+    SubscriptBox["k", "3"]}], "-", 
+   RowBox[{"6.5`", " ", 
+    SubscriptBox["k", "4"]}]}]],
+  CellChangeTimes->{3.910120670310795*^9},ExpressionUUID->
+  "1819e11c-33e4-4012-98d0-2d2fc6cbd074"],
+ "\nProtein\[CloseCurlyQuote]\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["k", "1"]}], "-", 
+      RowBox[{"2.5`", " ", 
+       SubscriptBox["k", "2"]}]}], ")"}], " ", 
+    SubscriptBox["k", "3"]}], "-", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2.5`", " ", 
+       SubscriptBox["k", "3"]}], "-", 
+      RowBox[{"6.5`", " ", 
+       SubscriptBox["k", "4"]}]}], ")"}], " ", 
+    SubscriptBox["k", "4"]}]}]],
+  CellChangeTimes->{3.910120670313027*^9},ExpressionUUID->
+  "775582f1-82e3-4523-a7f9-bae1e277728d"],
+ "\n\nRecall that the derivates are assumed to be known and have unique \
+solutions which can be used to assess the SIA of models "
+}], "Text",
+ CellChangeTimes->{{3.910120712170753*^9, 3.910120824899365*^9}, {
+  3.9101208889617567`*^9, 
+  3.910120923336197*^9}},ExpressionUUID->"e33b9f12-72e7-42ff-8af1-\
+e0b1b75ab1c5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Analysis of Taylor series coefficients \
+\>", "Subtitle",
+ CellChangeTimes->{{3.910120842098858*^9, 
+  3.9101208540103073`*^9}},ExpressionUUID->"efae6bc6-c1b9-431a-9593-\
+51002e239c3c"],
+
+Cell[TextData[{
+ "1. mRNA\[CloseCurlyQuote][0] can be substituted into mRNA\[CloseCurlyQuote]\
+\[CloseCurlyQuote][0] which leaves ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "576769e3-9639-416f-9866-06477ec1d971"],
+ " as the only unknown parameter and thus ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "69b906b9-543e-4afa-b17d-1324ce5dedc9"],
+ " is identifiable \n2. Since ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "2"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e8d6d751-f172-4e86-93de-bfdf73ae1f13"],
+ " is identifiable, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "1"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "85c7d34b-ea68-4482-b7a4-a1b6158cdd2c"],
+ " can be identified from mRNA\[CloseCurlyQuote][0]\n3. Use Protein\
+\[CloseCurlyQuote][0] to solve for ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "3"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "6b9fc02a-d5c0-4680-9f79-a8e27d37242f"],
+ ": ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "3"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e976f802-f85c-4f1d-8527-92e0b8472d8b"],
+ " -> 2.6 k4+0.4 Protein\[CloseCurlyQuote][0]\n4.Substitute new solution for ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "3"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "ac63ba9b-001b-4703-8c03-baabf98ce229"],
+ " into Protein\[CloseCurlyQuote]\[CloseCurlyQuote][0], which leaves ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "c5d6317e-6343-448f-9e4c-26e616ffd7a5"],
+ " as the only unknown parameter and thus ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "4"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "6042f18d-3cc3-4138-ae5f-5cb357233069"],
+ " is now identifiable\n5. This means that ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "3"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "4f66a061-0a55-4a11-879c-0905b83357a0"],
+ " can now be identified using step 3 and thus all the parameters have been \
+identified and Model 1 is structurally identifiable "
+}], "Text",
+ CellChangeTimes->{{3.9101208675463333`*^9, 3.910120879417317*^9}, {
+  3.910120931596655*^9, 3.910121148613039*^9}, {3.910122324522963*^9, 
+  3.910122326460845*^9}},ExpressionUUID->"7b973a42-49be-4185-9720-\
+2bee58244362"],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.910120272857286*^9, 
+  3.9101202834811163`*^9}},ExpressionUUID->"df395b2c-45e3-4025-8ea3-\
+0cb8915f2a82"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{236, Automatic}, {Automatic, 50}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8fda7627-0277-490b-a53a-c8737c116d22"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 193, 3, 160, "Title",ExpressionUUID->"d57d4984-8730-477a-909f-2f963d2f28df"],
+Cell[776, 27, 156, 3, 53, "Subtitle",ExpressionUUID->"004e17c0-b0f0-49c2-be12-0887d94e3eb1"],
+Cell[935, 32, 1008, 29, 105, "Text",ExpressionUUID->"a2279607-42ac-4101-b21b-b6ad1a7408e2"],
+Cell[CellGroupData[{
+Cell[1968, 65, 255, 7, 85, "Subtitle",ExpressionUUID->"783ca2e0-4a07-4356-82d1-9ff72bc1dd33"],
+Cell[2226, 74, 1909, 59, 173, "Text",ExpressionUUID->"e33b9f12-72e7-42ff-8af1-e0b1b75ab1c5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4172, 138, 196, 6, 85, "Subtitle",ExpressionUUID->"efae6bc6-c1b9-431a-9593-51002e239c3c"],
+Cell[4371, 146, 2597, 69, 196, "Text",ExpressionUUID->"7b973a42-49be-4185-9720-2bee58244362"],
+Cell[6971, 217, 144, 3, 35, "Text",ExpressionUUID->"df395b2c-45e3-4025-8ea3-0cb8915f2a82"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

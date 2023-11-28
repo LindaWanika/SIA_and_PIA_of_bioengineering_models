@@ -1,0 +1,518 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17448,        508]
+NotebookOptionsPosition[     16434,        482]
+NotebookOutlinePosition[     16829,        498]
+CellTagsIndexPosition[     16786,        495]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SIA for Model 2 using the Taylor series approach", "Title",
+ CellChangeTimes->{{3.910121346369493*^9, 
+  3.910121351965295*^9}},ExpressionUUID->"96311b94-79e1-4d0f-82a5-\
+6a7954cf6b1b"],
+
+Cell["ODE system ", "Subtitle",
+ CellChangeTimes->{{3.910121364156855*^9, 3.910121368743487*^9}, {
+  3.910121423179162*^9, 
+  3.910121423821494*^9}},ExpressionUUID->"8090fc04-f649-4fdf-858a-\
+a49e1dab3b36"],
+
+Cell[TextData[{
+ Cell[BoxData[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Glucose", "'"}], "[", "t", "]"}], "=", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["D", "r"], "*", 
+     RowBox[{"(", 
+      RowBox[{"GF", "-", 
+       RowBox[{"Glucose", "[", "t", "]"}]}], ")"}]}], "-", 
+    RowBox[{
+     SubscriptBox["r", "glu"], "*", 
+     RowBox[{"X", "[", "t", "]"}]}]}]}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Lactate", "'"}], "[", "t", "]"}], "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", 
+      SubscriptBox["D", "r"]}], "*", "Lactate"}], "+", 
+    RowBox[{
+     SubscriptBox["r", "lac"], "*", 
+     RowBox[{"X", "[", "t", "]"}]}]}]}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"X", "'"}], "[", "t", "]"}], " ", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        SubscriptBox["\[Mu]", "max"], "*", 
+        FractionBox[
+         RowBox[{"Glucose", "[", "t", "]"}], 
+         RowBox[{
+          SubscriptBox["km", "glu"], "+", 
+          RowBox[{"Glucose", "[", "t", "]"}]}]], "*", 
+        FractionBox[
+         SubscriptBox["ki", "lac"], 
+         RowBox[{
+          SubscriptBox["ki", "lac"], "+", 
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{"Lactate", "[", "t", "]"}], ")"}], "2"]}]]}], ")"}], "-", 
+      
+      SubscriptBox["D", "r"]}], ")"}], "*", 
+    RowBox[{"X", "[", "t", "]"}]}]}]}],
+  CellChangeTimes->{{3.9101091020817204`*^9, 3.910109395233019*^9}},
+  ExpressionUUID->"5eb3b413-8cef-4b21-9263-d2ae915eb62e"],
+ "\nInitial conditions: Glucose[0]=1.01, Lactate[0]=3.98, X[0]=0.46\nAll \
+states are observed and the only known parameters are ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["D", "r"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "1ecc96ae-de11-4929-9329-c74691e4b2f1"],
+ " and GF"
+}], "Text",
+ CellChangeTimes->{{3.910121433763479*^9, 
+  3.910121509721484*^9}},ExpressionUUID->"083dd571-6c07-4f87-bb86-\
+53029d47f5cb"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+First two derivatives for each state for when t = 0\
+\>", "Subtitle",
+ CellChangeTimes->{{3.910121524056592*^9, 
+  3.910121553818224*^9}},ExpressionUUID->"70ad59f1-b852-4393-9918-\
+7b2c9c674bbd"],
+
+Cell[TextData[{
+ "Glucose\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", "1.01`"}], "+", "GF"}], ")"}], " ", 
+    SubscriptBox["D", "r"]}], "-", 
+   RowBox[{"0.46`", " ", 
+    SubscriptBox["r", "glu"]}]}]],
+  CellChangeTimes->{3.910109549704281*^9},ExpressionUUID->
+  "1134bf2d-01cb-421e-8f66-3b13f90af2ff"],
+ "\nGlucose\[CloseCurlyQuote]\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", 
+     SubscriptBox["D", "r"]}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "1.01`"}], "+", "GF"}], ")"}], " ", 
+       SubscriptBox["D", "r"]}], "-", 
+      RowBox[{"0.46`", " ", 
+       SubscriptBox["r", "glu"]}]}], ")"}]}], "-", 
+   RowBox[{"0.46`", " ", 
+    SubscriptBox["r", "glu"], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       SubscriptBox["D", "r"]}], "+", 
+      FractionBox[
+       RowBox[{"1.01`", " ", 
+        SubscriptBox["ki", "lac"], " ", 
+        SubscriptBox["\[Mu]", "max"]}], 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"15.8404`", "\[VeryThinSpace]", "+", 
+          SubscriptBox["ki", "lac"]}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{"1.01`", "\[VeryThinSpace]", "+", 
+          SubscriptBox["km", "glu"]}], ")"}]}]]}], ")"}]}]}]],
+  CellChangeTimes->{3.910109549743854*^9},ExpressionUUID->
+  "2cc1cb5d-09d6-4b2d-a5dc-243a31002f6e"],
+ "\nLactate\[CloseCurlyQuote][0] =  ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "Lactate"}], " ", 
+    SubscriptBox["D", "r"]}], "+", 
+   RowBox[{"0.46`", " ", 
+    SubscriptBox["r", "lac"]}]}]],
+  CellChangeTimes->{3.910109549704281*^9},ExpressionUUID->
+  "1c070ab9-5537-4fb9-a304-5c3e1e4784c8"],
+ "\nLactate\[CloseCurlyQuote]\[CloseCurlyQuote][0] =  ",
+ Cell[BoxData[
+  RowBox[{"0.46`", " ", 
+   SubscriptBox["r", "lac"], " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"-", 
+      SubscriptBox["D", "r"]}], "+", 
+     FractionBox[
+      RowBox[{"1.01`", " ", 
+       SubscriptBox["ki", "lac"], " ", 
+       SubscriptBox["\[Mu]", "max"]}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"15.8404`", "\[VeryThinSpace]", "+", 
+         SubscriptBox["ki", "lac"]}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"1.01`", "\[VeryThinSpace]", "+", 
+         SubscriptBox["km", "glu"]}], ")"}]}]]}], ")"}]}]],
+  CellChangeTimes->{3.910109549743854*^9},ExpressionUUID->
+  "ee5e43f5-52e4-4cff-a290-555d1440f28d"],
+ "\nX\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{"0.46`", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"-", 
+      SubscriptBox["D", "r"]}], "+", 
+     FractionBox[
+      RowBox[{"1.01`", " ", 
+       SubscriptBox["ki", "lac"], " ", 
+       SubscriptBox["\[Mu]", "max"]}], 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"15.8404`", "\[VeryThinSpace]", "+", 
+         SubscriptBox["ki", "lac"]}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"1.01`", "\[VeryThinSpace]", "+", 
+         SubscriptBox["km", "glu"]}], ")"}]}]]}], ")"}]}]],
+  CellChangeTimes->{3.910109549704281*^9},ExpressionUUID->
+  "0b59d01c-5966-405c-af1d-a9e0b2537d87"],
+ "\nX\[CloseCurlyQuote]\[CloseCurlyQuote][0] = ",
+ Cell[BoxData[
+  RowBox[{
+   RowBox[{"0.46`", " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", 
+        SubscriptBox["D", "r"]}], "+", 
+       FractionBox[
+        RowBox[{"1.01`", " ", 
+         SubscriptBox["ki", "lac"], " ", 
+         SubscriptBox["\[Mu]", "max"]}], 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"15.8404`", "\[VeryThinSpace]", "+", 
+           SubscriptBox["ki", "lac"]}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{"1.01`", "\[VeryThinSpace]", "+", 
+           SubscriptBox["km", "glu"]}], ")"}]}]]}], ")"}], "2"]}], "+", 
+   RowBox[{"0.46`", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"-", 
+       FractionBox[
+        RowBox[{"1.01`", " ", 
+         SubscriptBox["ki", "lac"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "1.01`"}], "+", "GF"}], ")"}], " ", 
+            SubscriptBox["D", "r"]}], "-", 
+           RowBox[{"0.46`", " ", 
+            SubscriptBox["r", "glu"]}]}], ")"}], " ", 
+         SubscriptBox["\[Mu]", "max"]}], 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"15.8404`", "\[VeryThinSpace]", "+", 
+           SubscriptBox["ki", "lac"]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{"1.01`", "\[VeryThinSpace]", "+", 
+            SubscriptBox["km", "glu"]}], ")"}], "2"]}]]}], "+", 
+      FractionBox[
+       RowBox[{
+        SubscriptBox["ki", "lac"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1.01`"}], "+", "GF"}], ")"}], " ", 
+           SubscriptBox["D", "r"]}], "-", 
+          RowBox[{"0.46`", " ", 
+           SubscriptBox["r", "glu"]}]}], ")"}], " ", 
+        SubscriptBox["\[Mu]", "max"]}], 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"15.8404`", "\[VeryThinSpace]", "+", 
+          SubscriptBox["ki", "lac"]}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{"1.01`", "\[VeryThinSpace]", "+", 
+          SubscriptBox["km", "glu"]}], ")"}]}]], "-", 
+      FractionBox[
+       RowBox[{"8.0396`", " ", 
+        SubscriptBox["ki", "lac"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "Lactate"}], " ", 
+           SubscriptBox["D", "r"]}], "+", 
+          RowBox[{"0.46`", " ", 
+           SubscriptBox["r", "lac"]}]}], ")"}], " ", 
+        SubscriptBox["\[Mu]", "max"]}], 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"15.8404`", "\[VeryThinSpace]", "+", 
+           SubscriptBox["ki", "lac"]}], ")"}], "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{"1.01`", "\[VeryThinSpace]", "+", 
+          SubscriptBox["km", "glu"]}], ")"}]}]]}], ")"}]}]}]],
+  CellChangeTimes->{3.910109549743854*^9},ExpressionUUID->
+  "0b4bfd37-56f2-4ecc-88ec-088afc7d231f"]
+}], "Text",
+ CellChangeTimes->{{3.9101215646873207`*^9, 
+  3.910121728421056*^9}},ExpressionUUID->"8db7adb1-8b4c-4dcd-8e96-\
+8ceffe584734"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Analysis of Taylor series coefficients", \
+"Subtitle"]], "Section",
+ CellChangeTimes->{
+  3.9101217513581133`*^9},ExpressionUUID->"d783ae51-c88e-4bae-b4cc-\
+f9d9f694bbcc"],
+
+Cell[TextData[{
+ "1. ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["r", "glu"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "dcc61572-5956-48f5-9407-509b984db72d"],
+ " can be identified from Glucose\[CloseCurlyQuote][0]\n2. ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["r", "lac"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e8319764-e466-4b7d-b26c-5d025216c4a9"],
+ " can be identified from Lactate\[CloseCurlyQuote][0]\n3. Use Glucose\
+\[CloseCurlyQuote]\[CloseCurlyQuote][0] to solve for ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["ki", "lac"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "cc6ab54c-b222-48be-8f50-b420458bfaa3"],
+ ":  ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["ki", "lac"], "\[Rule]", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"3.392726274752475`*^15", " ", 
+       RowBox[{
+        RowBox[{"Glucose", "''"}], "[", "0", "]"}]}], "-", 
+      RowBox[{"3.4266535375`*^15", " ", 
+       SubsuperscriptBox["D", "r", "2"]}], "+", 
+      RowBox[{"3.392726274752475`*^15", " ", "GF", " ", 
+       SubsuperscriptBox["D", "r", "2"]}], "+", 
+      RowBox[{"3.3591349254975`*^15", " ", 
+       RowBox[{
+        RowBox[{"Glucose", "''"}], "[", "0", "]"}], " ", 
+       SubscriptBox["km", "glu"]}], "-", 
+      RowBox[{"3.392726274752475`*^15", " ", 
+       SubsuperscriptBox["D", "r", "2"], " ", 
+       SubscriptBox["km", "glu"]}], "+", 
+      RowBox[{"3.3591349254975`*^15", " ", "GF", " ", 
+       SubsuperscriptBox["D", "r", "2"], " ", 
+       SubscriptBox["km", "glu"]}], "-", 
+      RowBox[{"3.121308172772277`*^15", " ", 
+       SubscriptBox["D", "r"], " ", 
+       SubscriptBox["r", "glu"]}], "-", 
+      RowBox[{"3.0904041314577`*^15", " ", 
+       SubscriptBox["D", "r"], " ", 
+       SubscriptBox["km", "glu"], " ", 
+       SubscriptBox["r", "glu"]}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "2.141818561875`*^14"}], " ", 
+       RowBox[{
+        RowBox[{"Glucose", "''"}], "[", "0", "]"}]}], "+", 
+      RowBox[{"2.16323674749375`*^14", " ", 
+       SubsuperscriptBox["D", "r", "2"]}], "-", 
+      RowBox[{"2.141818561875`*^14", " ", "GF", " ", 
+       SubsuperscriptBox["D", "r", "2"]}], "-", 
+      RowBox[{"2.1206124375`*^14", " ", 
+       RowBox[{
+        RowBox[{"Glucose", "''"}], "[", "0", "]"}], " ", 
+       SubscriptBox["km", "glu"]}], "+", 
+      RowBox[{"2.141818561875`*^14", " ", 
+       SubsuperscriptBox["D", "r", "2"], " ", 
+       SubscriptBox["km", "glu"]}], "-", 
+      RowBox[{"2.1206124375`*^14", " ", "GF", " ", 
+       SubsuperscriptBox["D", "r", "2"], " ", 
+       SubscriptBox["km", "glu"]}], "+", 
+      RowBox[{"1.970473076925`*^14", " ", 
+       SubscriptBox["D", "r"], " ", 
+       SubscriptBox["r", "glu"]}], "+", 
+      RowBox[{"1.9509634425`*^14", " ", 
+       SubscriptBox["D", "r"], " ", 
+       SubscriptBox["km", "glu"], " ", 
+       SubscriptBox["r", "glu"]}], "-", 
+      RowBox[{"9.852365384625`*^13", " ", 
+       SubscriptBox["r", "glu"], " ", 
+       SubscriptBox["\[Mu]", "max"]}]}], ")"}]}]}]],
+  CellChangeTimes->{3.910109907577814*^9, 3.910110005279752*^9},
+  ExpressionUUID->"61e70dfa-fa74-47cd-9798-59d99455e07c"],
+ "\n4. Substitute new ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["ki", "lac"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "023e86fa-d044-4f9f-aade-6ceaa84f9abc"],
+ " solution into X\[CloseCurlyQuote][0] which leaves ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["km", "glu"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "15311597-ad60-40b6-87bb-c8a103368e38"],
+ " as the only unknown parameter and thus ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["km", "glu"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "a7f39aa1-b2e9-4e80-97ad-26e93c4b302a"],
+ " is identifiable\n5. Use X\[CloseCurlyQuote][0] to solve for ",
+ Cell[BoxData[
+  SubscriptBox["\[Mu]", "max"]],
+  CellChangeTimes->{3.910109907577814*^9, 3.910110005279752*^9},
+  ExpressionUUID->"3719bd35-64cb-48ad-a887-bb333e3c0979"],
+ ":  ",
+ Cell[BoxData[
+  RowBox[{
+   SubscriptBox["\[Mu]", "max"], "\[Rule]", 
+   RowBox[{
+    FractionBox["1", 
+     SubscriptBox["ki", "lac"]], "1.7219113215669393`*^-7", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"1.9998505`*^8", " ", 
+       RowBox[{
+        RowBox[{"X", "'"}], "[", "0", "]"}]}], "+", 
+      RowBox[{"9.1993123`*^7", " ", 
+       SubscriptBox["D", "r"]}], "+", 
+      RowBox[{"1.2625`*^7", " ", 
+       RowBox[{
+        RowBox[{"X", "'"}], "[", "0", "]"}], " ", 
+       SubscriptBox["ki", "lac"]}], "+", 
+      RowBox[{"5.8075`*^6", " ", 
+       SubscriptBox["D", "r"], " ", 
+       SubscriptBox["ki", "lac"]}], "+", 
+      RowBox[{"1.98005`*^8", " ", 
+       RowBox[{
+        RowBox[{"X", "'"}], "[", "0", "]"}], " ", 
+       SubscriptBox["km", "glu"]}], "+", 
+      RowBox[{"9.10823`*^7", " ", 
+       SubscriptBox["D", "r"], " ", 
+       SubscriptBox["km", "glu"]}], "+", 
+      RowBox[{"1.25`*^7", " ", 
+       RowBox[{
+        RowBox[{"X", "'"}], "[", "0", "]"}], " ", 
+       SubscriptBox["ki", "lac"], " ", 
+       SubscriptBox["km", "glu"]}], "+", 
+      RowBox[{"5.75`*^6", " ", 
+       SubscriptBox["D", "r"], " ", 
+       SubscriptBox["ki", "lac"], " ", 
+       SubscriptBox["km", "glu"]}]}], ")"}]}]}]],
+  CellChangeTimes->{3.9101101201521597`*^9},ExpressionUUID->
+  "9abc24c9-1f31-47ad-8d16-eece89ca1ff0"],
+ "\n6. Substitute new ",
+ Cell[BoxData[
+  SubscriptBox["\[Mu]", "max"]],
+  CellChangeTimes->{3.910109907577814*^9, 3.910110005279752*^9},
+  ExpressionUUID->"1b321ae9-a6d8-44e8-9e12-891b6a2136d9"],
+ " solution into Glucose\[CloseCurlyQuote]\[CloseCurlyQuote][0] which leaves ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["ki", "lac"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "ef67b946-2b19-4536-b666-2421d38f952e"],
+ " as the only unknown parameter and thus ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["ki", "lac"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "30906316-acbb-4d52-a57c-88b00e3280ed"],
+ " is now identifiable\n7.  ",
+ Cell[BoxData[
+  SubscriptBox["\[Mu]", "max"]],
+  CellChangeTimes->{3.910109907577814*^9, 3.910110005279752*^9},
+  ExpressionUUID->"c70f3ed4-e9a3-4f2b-b309-d0436a826637"],
+ " can now be identified from X\[CloseCurlyQuote][0] which means that all \
+parameters have been identified and Model 2 is structurally identifiable"
+}], "Text",
+ CellChangeTimes->{{3.910121770865642*^9, 3.91012182097787*^9}, {
+  3.9101218768383427`*^9, 3.910121918906644*^9}, {3.910121958594439*^9, 
+  3.910122127818277*^9}, {3.910122161591703*^9, 
+  3.910122319846128*^9}},ExpressionUUID->"ce007097-cb26-4673-9d51-\
+8d51d5fa1bbb"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{44, Automatic}, {0, Automatic}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6a13c666-1229-46cc-bc92-e1b41724c219"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 191, 3, 160, "Title",ExpressionUUID->"96311b94-79e1-4d0f-82a5-6a7954cf6b1b"],
+Cell[774, 27, 206, 4, 53, "Subtitle",ExpressionUUID->"8090fc04-f649-4fdf-858a-a49e1dab3b36"],
+Cell[983, 33, 1974, 61, 146, "Text",ExpressionUUID->"083dd571-6c07-4f87-bb86-53029d47f5cb"],
+Cell[CellGroupData[{
+Cell[2982, 98, 206, 6, 85, "Subtitle",ExpressionUUID->"70ad59f1-b852-4393-9918-7b2c9c674bbd"],
+Cell[3191, 106, 6248, 187, 363, "Text",ExpressionUUID->"8db7adb1-8b4c-4dcd-8e96-8ceffe584734"],
+Cell[CellGroupData[{
+Cell[9464, 297, 195, 4, 62, "Section",ExpressionUUID->"d783ae51-c88e-4bae-b4cc-f9d9f694bbcc"],
+Cell[9662, 303, 6732, 174, 612, "Text",ExpressionUUID->"ce007097-cb26-4673-9d51-8d51d5fa1bbb"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
