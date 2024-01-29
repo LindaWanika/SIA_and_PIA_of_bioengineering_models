@@ -6,9 +6,9 @@ DESCRIPTION
 %Parameter name in model script	Original parameter name 
 %k1	r_glu 
 %k2	r_lac 
-%k3	?_max 
-%k4	?km?_glu 
-%k5 	?ki?_lac 
+%k3	mu_max 
+%k4	km_glu 
+%k5 ki_lac 
 
 
 PREDICTOR
@@ -23,9 +23,9 @@ Cells C "mmol/l" "conc."
 INPUTS
  
 ODES
-"0.017*(0.131 - glu) ? k1*Cells"
+"0.017*(0.131 - glu) - k1*Cells"
 " -0.017*Lac + k2*Cells"
-"((k3*Glu/(k4 + Glu)*k5/(k5 + (Lac)^2)) ? 0.017)*Cells"
+"((k3*Glu/(k4 + Glu)*k5/(k5 + (Lac)^2)) - 0.017)*Cells"
 DERIVED
  
 CONDITIONS
